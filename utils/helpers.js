@@ -33,7 +33,7 @@ export function addCardToDeck(title, questionAndAnswer) {
       ...decks,
       [title]: {
         ...decks[title],
-        questions: decks[title].questions.concat([questionAndAnswer]);
+        questions: decks[title].questions.concat([questionAndAnswer])
       }
     }))
     .then((decks) => {
