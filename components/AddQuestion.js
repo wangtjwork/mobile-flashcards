@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { gray, purple, white, black } from '../utils/colors';
 import CustomInput from './CustomInput';
 
@@ -68,4 +68,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AddQuestion;
+export default AddQuestion
