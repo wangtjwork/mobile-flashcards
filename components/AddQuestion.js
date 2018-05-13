@@ -39,8 +39,8 @@ class AddQuestion extends Component {
           value={answer}
           handleChange={this.handleChange('answer')}
         />
-        <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}} onPress={this.handleSubmit}>
-          <Text style={styles.submitBtn}>Submit</Text>
+        <TouchableOpacity style={styles.submitBtn} onPress={this.handleSubmit}>
+          <Text style={styles.submitText}>Submit</Text>
         </TouchableOpacity>
       </View>
     )
@@ -52,31 +52,19 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
-  inputWrap: {
-    marginTop: 20,
-    marginBottom: 20,
-    marginLeft: 10,
-    marginRight: 10,
-    height: 50,
-    borderColor: black,
-    borderWidth: 1,
-    borderRadius: Platform.OS === 'ios' ? 8 : 2,
-    justifyContent: 'center'
-  },
-  input: {
-    height: 35,
-    marginLeft: 10,
-    marginRight: 10,
-    borderBottomColor: gray,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
   submitBtn: {
-    textAlign: 'center',
     backgroundColor: purple,
-    color: white,
     padding: 10,
     paddingRight: 30,
-    paddingLeft: 30
+    paddingLeft: 30,
+    borderRadius: Platform.OS === 'ios' ? 8 : 2,
+    borderColor: purple,
+    width: 150,
+    alignSelf: 'center'
+  },
+  submitText: {
+    color: white,
+    textAlign: 'center'
   }
 })
 
