@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import { getDecks } from './utils/helpers';
 import { red } from './utils/colors';
 import AddQuestion from './components/AddQuestion';
+import { Constants } from 'expo';
+import { purple } from './utils/colors';
 
 export default class App extends React.Component {
   state = {
@@ -35,7 +37,10 @@ export default class App extends React.Component {
     }
 
     return (
-      <View style={styles.container}>
+      <View>
+        <View style={{backgroundColor: purple, height: Constants.statusBarHeight}}>
+          <StatusBar translucent backgroundColor={purple} barStyle='light-content' />
+        </View>
         <AddQuestion />
       </View>
     );
