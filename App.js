@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { getDecks } from './utils/helpers';
 import { red } from './utils/colors';
+import AddQuestion from './components/AddQuestion';
 
 export default class App extends React.Component {
   state = {
@@ -35,9 +36,7 @@ export default class App extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text>{JSON.stringify(decks)}</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <AddQuestion />
       </View>
     );
   }
