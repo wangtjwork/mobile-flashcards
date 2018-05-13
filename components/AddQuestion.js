@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { gray, purple, white, black } from '../utils/colors';
+import CustomInput from './CustomInput';
 
 class AddQuestion extends Component {
   state = {
@@ -28,22 +29,18 @@ class AddQuestion extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.inputWrap}>
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => this.handleChange('question', text)}
-            value={question}
-            placeholder={'Question: '}
-          />
-        </View>
-        <View style={styles.inputWrap}>
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => this.handleChange('answer', text)}
-            value={answer}
-            placeholder={'Answer: '}
-          />
-        </View>
+        <CustomInput
+          inputName={'question'}
+          placeholder={'Question: '}
+          value={question}
+          handleChange={this.handleChange}
+        />
+        <CustomInput
+          inputName={'answer'}
+          placeholder={'Answer: '}
+          value={answer}
+          handleChange={this.handleChange}
+        />
         <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}} onPress={this.handleSubmit}>
           <Text style={styles.submitBtn}>Submit</Text>
         </TouchableOpacity>
