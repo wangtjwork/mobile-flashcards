@@ -9,7 +9,7 @@ class AddQuestion extends Component {
     answer: ''
   }
 
-  handleChange = (textType, newText) => {
+  handleChange = (textType) => (newText) => {
     this.setState({
       [textType]: newText
     });
@@ -30,16 +30,14 @@ class AddQuestion extends Component {
     return (
       <View style={styles.container}>
         <CustomInput
-          inputName={'question'}
           placeholder={'Question: '}
           value={question}
-          handleChange={this.handleChange}
+          handleChange={this.handleChange('question')}
         />
         <CustomInput
-          inputName={'answer'}
           placeholder={'Answer: '}
           value={answer}
-          handleChange={this.handleChange}
+          handleChange={this.handleChange('answer')}
         />
         <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}} onPress={this.handleSubmit}>
           <Text style={styles.submitBtn}>Submit</Text>

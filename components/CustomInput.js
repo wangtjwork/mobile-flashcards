@@ -14,13 +14,13 @@ class CustomInput extends Component {
   }
 
   render() {
-    const { inputName, handleChange, ...res } = this.props;
+    const { handleChange, ...res } = this.props;
 
     return (
       <View style={styles.inputWrap}>
         <TextInput
           style={[styles.input, {borderBottomColor: this.state.selected ? gray : green}]}
-          onChangeText={(text) => handleChange(inputName, text)}
+          onChangeText={(text) => handleChange(text)}
           {...res}
           onFocus={this.handleFocus}
         />
