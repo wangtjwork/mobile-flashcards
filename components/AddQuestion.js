@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
-import { gray, purple, white } from '../utils/colors';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { gray, purple, white, black } from '../utils/colors';
 
 class AddQuestion extends Component {
   state = {
@@ -62,14 +62,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginLeft: 10,
     marginRight: 10,
-    height: 45,
-    borderColor: gray,
+    height: 50,
+    borderColor: black,
     borderWidth: 1,
+    borderRadius: Platform.OS === 'ios' ? 8 : 2,
+    justifyContent: 'center'
   },
   input: {
-    height: 40,
-    marginLeft: 2,
-    marginRight: 2,
+    height: 35,
+    marginLeft: 10,
+    marginRight: 10,
     borderBottomColor: gray,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
