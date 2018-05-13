@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import { getDecks } from './utils/helpers';
 import { red } from './utils/colors';
 import AddDeck from './components/AddDeck';
+import AddQuestion from './components/AddQuestion';
 import { Constants } from 'expo';
 import { purple } from './utils/colors';
 
@@ -41,7 +42,7 @@ export default class App extends React.Component {
         <View style={{backgroundColor: purple, height: Constants.statusBarHeight}}>
           <StatusBar translucent backgroundColor={purple} barStyle='light-content' />
         </View>
-        <AddDeck />
+        <AddQuestion />
       </View>
     );
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { gray, purple, white, black } from '../utils/colors';
 import CustomInput from './CustomInput';
+import TextButton from './TextButton';
 
 class AddQuestion extends Component {
   state = {
@@ -39,9 +40,12 @@ class AddQuestion extends Component {
           value={answer}
           handleChange={this.handleChange('answer')}
         />
-        <TouchableOpacity style={styles.submitBtn} onPress={this.handleSubmit}>
-          <Text style={styles.submitText}>Submit</Text>
-        </TouchableOpacity>
+        <TextButton
+          onPress={this.handleSubmit}
+          style={{width: 150, backgroundColor: purple}}
+        >
+          Submit
+        </TextButton>
       </View>
     )
   }
@@ -51,20 +55,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-  },
-  submitBtn: {
-    backgroundColor: purple,
-    padding: 10,
-    paddingRight: 30,
-    paddingLeft: 30,
-    borderRadius: Platform.OS === 'ios' ? 8 : 2,
-    borderColor: purple,
-    width: 150,
-    alignSelf: 'center'
-  },
-  submitText: {
-    color: white,
-    textAlign: 'center'
   }
 })
 
