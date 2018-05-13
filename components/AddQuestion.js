@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { gray } from '../utils/colors';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { gray, purple, white } from '../utils/colors';
 
 class AddQuestion extends Component {
   state = {
@@ -16,13 +16,12 @@ class AddQuestion extends Component {
 
   render() {
     const { question, answer } = this.state;
-    console.log('Question is now: ', question);
-    console.log('Answer is now: ', answer);
 
     return (
       <View style={styles.container}>
         <View style={styles.inputWrap}>
           <TextInput
+            style={styles.input}
             onChangeText={(text) => this.handleChange('question', text)}
             value={question}
             placeholder={'Question: '}
@@ -30,11 +29,15 @@ class AddQuestion extends Component {
         </View>
         <View style={styles.inputWrap}>
           <TextInput
+            style={styles.input}
             onChangeText={(text) => this.handleChange('answer', text)}
             value={answer}
             placeholder={'Answer: '}
           />
         </View>
+          <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}}>
+            <Text style={styles.submitBtn}>Submit</Text>
+          </TouchableOpacity>
       </View>
     )
   }
@@ -46,13 +49,28 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   inputWrap: {
-    marginTop: 30,
-    marginBottom: 30,
+    marginTop: 20,
+    marginBottom: 20,
     marginLeft: 10,
     marginRight: 10,
     height: 45,
     borderColor: gray,
     borderWidth: 1,
+  },
+  input: {
+    height: 40,
+    marginLeft: 2,
+    marginRight: 2,
+    borderBottomColor: gray,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  submitBtn: {
+    textAlign: 'center',
+    backgroundColor: purple,
+    color: white,
+    padding: 10,
+    paddingRight: 30,
+    paddingLeft: 30
   }
 })
 
