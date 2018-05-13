@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
-import { gray, purple, white, black } from '../utils/colors';
+import { black } from '../utils/colors';
 import CustomInput from './CustomInput';
 import TextButton from './TextButton';
 
@@ -18,8 +18,8 @@ class AddQuestion extends Component {
 
   handleSubmit = () => {
     const { question, answer } = this.state;
-    console.log('Question: ', question);
-    console.log('Answer: ', answer);
+    console.log('Question:', question);
+    console.log('Answer:', answer);
 
     // TODO: submit to database,
     // TODO: go back to deck
@@ -42,7 +42,7 @@ class AddQuestion extends Component {
         />
         <TextButton
           onPress={this.handleSubmit}
-          style={{width: 150, backgroundColor: purple}}
+          style={{width: 150, backgroundColor: black}}
         >
           Submit
         </TextButton>

@@ -42,7 +42,7 @@ export default class App extends React.Component {
         <View style={{backgroundColor: purple, height: Constants.statusBarHeight}}>
           <StatusBar translucent backgroundColor={purple} barStyle='light-content' />
         </View>
-        <AddQuestion />
+        <AddDeck />
       </View>
     );
   }

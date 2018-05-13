@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import CustomInput from './CustomInput';
+import TextButton from './TextButton';
+import { black } from '../utils/colors';
 
 class AddDeck extends Component {
   state = {
@@ -13,20 +15,43 @@ class AddDeck extends Component {
     });
   }
 
+  handleSubmit = () => {
+    // TODO: go to decks
+    // TODO: Add a new deck
+  }
+
   render() {
     const { title, handleChange } = this.state;
 
     return (
-      <View style={{flex: 1, alignItems: 'center'}}>
-        <Text>What is the title of your new deck?</Text>
+      <View style={styles.container}>
+        <Text style={styles.header}>What is the title of your new deck?</Text>
         <CustomInput
           placeholder={'Deck Title'}
           value={title}
           handleChange={this.handleChange}
         />
+        <TextButton
+          onPress={this.handleSubmit}
+          style={{width: 150, backgroundColor: black}}
+        >
+          Submit
+        </TextButton>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 50
+  },
+  header: {
+    fontSize: 50,
+    textAlign: 'center',
+    padding: 15
+  }
+})
 
 export default AddDeck
