@@ -14,6 +14,15 @@ class AddQuestion extends Component {
     });
   }
 
+  handleSubmit = () => {
+    const { question, answer } = this.state;
+    console.log('Question: ', question);
+    console.log('Answer: ', answer);
+
+    // TODO: submit to database,
+    // TODO: go back to deck
+  }
+
   render() {
     const { question, answer } = this.state;
 
@@ -35,9 +44,9 @@ class AddQuestion extends Component {
             placeholder={'Answer: '}
           />
         </View>
-          <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={styles.submitBtn}>Submit</Text>
-          </TouchableOpacity>
+        <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}} onPress={this.handleSubmit}>
+          <Text style={styles.submitBtn}>Submit</Text>
+        </TouchableOpacity>
       </View>
     )
   }
