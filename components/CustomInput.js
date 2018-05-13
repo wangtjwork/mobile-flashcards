@@ -13,16 +13,23 @@ class CustomInput extends Component {
     })
   }
 
+  handleBlur = () => {
+    this.setState({
+      selected: false
+    })
+  }
+
   render() {
     const { handleChange, ...res } = this.props;
 
     return (
       <View style={styles.inputWrap}>
         <TextInput
-          style={[styles.input, {borderBottomColor: this.state.selected ? gray : green}]}
+          style={[styles.input, {borderBottomColor: this.state.selected ? green : gray}]}
           onChangeText={(text) => handleChange(text)}
           {...res}
           onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
         />
       </View>
     )
@@ -45,7 +52,6 @@ const styles = StyleSheet.create({
     height: 35,
     marginLeft: 10,
     marginRight: 10,
-    borderBottomColor: gray,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
 });
