@@ -37,7 +37,7 @@ export default class App extends React.Component {
     }
 
     return (
-      <View>
+      <View style={{flex: 1}}>
         <View style={{backgroundColor: purple, height: Constants.statusBarHeight}}>
           <StatusBar translucent backgroundColor={purple} barStyle='light-content' />
         </View>

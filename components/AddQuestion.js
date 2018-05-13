@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { gray } from '../utils/colors';
 
 class AddQuestion extends Component {
   state = {
@@ -20,18 +21,20 @@ class AddQuestion extends Component {
 
     return (
       <View style={styles.container}>
-        <TextInput
-          style={styles.input}
-          multiline={false}
-          onChangeText={(text) => this.handleChange('question', text)}
-          value={question}
-        />
-        <TextInput
-          style={styles.input}
-          multiline={false}
-          onChangeText={(text) => this.handleChange('answer', text)}
-          value={answer}
-        />
+        <View style={styles.inputWrap}>
+          <TextInput
+            onChangeText={(text) => this.handleChange('question', text)}
+            value={question}
+            placeholder={'Question: '}
+          />
+        </View>
+        <View style={styles.inputWrap}>
+          <TextInput
+            onChangeText={(text) => this.handleChange('answer', text)}
+            value={answer}
+            placeholder={'Answer: '}
+          />
+        </View>
       </View>
     )
   }
@@ -40,14 +43,16 @@ class AddQuestion extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
   },
-  input: {
-    flex: 1,
-    padding: 15,
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1
+  inputWrap: {
+    marginTop: 30,
+    marginBottom: 30,
+    marginLeft: 10,
+    marginRight: 10,
+    height: 45,
+    borderColor: gray,
+    borderWidth: 1,
   }
 })
 
