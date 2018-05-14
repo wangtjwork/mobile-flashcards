@@ -10,6 +10,14 @@ class AddQuestion extends Component {
     answer: ''
   }
 
+  static navigationOptions = ({ navigation }) => {
+    const { title } = navigation.state.params;
+
+    return {
+      title: `Add Card for ${title}`
+    }
+  }
+
   handleChange = (textType) => (newText) => {
     this.setState({
       [textType]: newText
@@ -18,11 +26,14 @@ class AddQuestion extends Component {
 
   handleSubmit = () => {
     const { question, answer } = this.state;
+    const { title } = this.props.navigation.state.params;
     console.log('Question:', question);
     console.log('Answer:', answer);
+    console.log('Deck:', title);
 
     // TODO: submit to database,
     // TODO: go back to deck
+    this.props.navigation.goBack();
   }
 
   render() {
