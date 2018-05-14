@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 import { getDecks } from '../utils/helpers';
-import { gray, red } from '../utils/colors';
+import { gray, red, white, purple } from '../utils/colors';
+import Deck from './Deck';
 
 class Dashboard extends Component {
   state = {
@@ -45,6 +47,10 @@ class Dashboard extends Component {
       })
   }
 
+  handleGoToDeck = () => {
+    console.log('Pressed');
+  }
+
   render() {
     const { decks, loading } = this.state;
 
@@ -62,10 +68,10 @@ class Dashboard extends Component {
           const deck = decks[deckTitle];
           const size = deck.questions.length;
           return (
-            <View key={deck.title} style={styles.deckContainer}>
+            <TouchableOpacity key={deck.title} style={styles.deckContainer} onPress={this.handleGoToDeck}>
               <Text style={styles.deckTitle}>{deck.title}</Text>
               <Text style={styles.deckSize}>{size} {size === 1 ? 'card' : 'cards'}</Text>
-            </View>
+            </TouchableOpacity>
           )
         })}
       </View>
@@ -88,6 +94,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: gray
   }
+});
+
+const DecksNavigator = createStackNavigator({
+  Dashboard: {
+    screen: Dashboard,
+  },
+  Deck: {
+    screen: Deck,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  }
 })
 
-export default Dashboard
+export default DecksNavigator
