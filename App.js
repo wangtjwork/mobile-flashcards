@@ -5,6 +5,7 @@ import { red } from './utils/colors';
 import AddDeck from './components/AddDeck';
 import AddQuestion from './components/AddQuestion';
 import Dashboard from './components/Dashboard';
+import Deck from './components/Deck';
 import { Constants } from 'expo';
 import { purple } from './utils/colors';
 
@@ -66,7 +67,7 @@ export default class App extends React.Component {
         <View style={{backgroundColor: purple, height: Constants.statusBarHeight}}>
           <StatusBar translucent backgroundColor={purple} barStyle='light-content' />
         </View>
-        <Dashboard decks={this.state.decks}/>
+        <Deck deck={this.state.decks['React']}/>
       </View>
     );
   }

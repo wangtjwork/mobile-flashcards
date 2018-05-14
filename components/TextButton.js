@@ -2,18 +2,20 @@ import React from 'react';
 import { TouchableOpacity, Text, Platform, StyleSheet } from 'react-native';
 import { lightPurp, white } from '../utils/colors';
 
-export default function TextButton({ children, onPress, style={} }) {
+export default function TextButton({ children, onPress, style={}, textStyle={} }) {
 
   return (
     <TouchableOpacity style={[styles.submitBtn, style]} onPress={onPress}>
-      <Text style={styles.text}>{children}</Text>
+      <Text style={[styles.text, textStyle]}>{children}</Text>
     </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
   submitBtn: {
-    padding: 10,
+    marginTop: 5,
+    marginBottom: 5,
+    padding: 15,
     paddingRight: 30,
     paddingLeft: 30,
     borderRadius: Platform.OS === 'ios' ? 8 : 2,
@@ -22,6 +24,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: white,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 20
   }
 });
