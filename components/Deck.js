@@ -4,6 +4,14 @@ import TextButton from './TextButton';
 import { white, black, gray } from '../utils/colors';
 
 class Deck extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { deck } = navigation.state.params;
+
+    return {
+      title: deck.title
+    }
+  }
+
   handleAddCard = () => {
 
   }
