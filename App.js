@@ -7,15 +7,24 @@ import Deck from './components/Deck';
 import { Constants } from 'expo';
 import { purple } from './utils/colors';
 import { createBottomTabNavigator } from 'react-navigation';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 const Tabs = createBottomTabNavigator({
-  AddDeck: {
-    screen: AddDeck
-  },
   Dashboard: {
-    screen: Dashboard
+    screen: Dashboard,
+    navigationOptions: {
+      tabBarLabel: 'DECKS',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='dashboard' size={30} color={tintColor} />
+    }
+  },
+  AddDeck: {
+    screen: AddDeck,
+    navigationOptions: {
+      tabBarLabel: 'NEW DECK',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+    }
   }
 })
 
