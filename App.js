@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, YellowBox } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, YellowBox, Platform } from 'react-native';
 import AddDeck from './components/AddDeck';
 import AddQuestion from './components/AddQuestion';
 import Dashboard from './components/Dashboard';
 import Deck from './components/Deck';
 import { Constants } from 'expo';
-import { purple } from './utils/colors';
+import { purple, white } from './utils/colors';
 import { createBottomTabNavigator } from 'react-navigation';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
@@ -24,6 +24,21 @@ const Tabs = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'NEW DECK',
       tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+    }
+  }
+},{
+  tabBarOptions: {
+    activeTintColor: Platform.OS === 'ios' ? purple : white,
+    style: {
+      height: 56,
+      backgroundColor: Platform.OS === 'ios' ? white : purple,
+      shadowColor: 'rgba(0,0,0,0.24)',
+      shadowOffset: {
+        width: 0,
+        height: 3
+      },
+      shadowRadius: 6,
+      shadowOpacity: 1
     }
   }
 })
