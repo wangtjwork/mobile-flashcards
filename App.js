@@ -4,7 +4,7 @@ import { getDecks } from './utils/helpers';
 import { red } from './utils/colors';
 import AddDeck from './components/AddDeck';
 import AddQuestion from './components/AddQuestion';
-import DashBoard from './components/DashBoard';
+import Dashboard from './components/Dashboard';
 import { Constants } from 'expo';
 import { purple } from './utils/colors';
 
@@ -18,7 +18,30 @@ export default class App extends React.Component {
     getDecks()
       .then((decks) => {
         if (decks === null) {
-          decks = {};
+          decks = {
+            React: {
+              title: 'React',
+              questions: [
+                {
+                  question: 'What is React?',
+                  answer: 'A library for managing user interfaces'
+                },
+                {
+                  question: 'Where do you make Ajax requests in React?',
+                  answer: 'The componentDidMount lifecycle event'
+                }
+              ]
+            },
+            JavaScript: {
+              title: 'JavaScript',
+              questions: [
+                {
+                  question: 'What is a closure?',
+                  answer: 'The combination of a function and the lexical environment within which that function was declared.'
+                }
+              ]
+            }
+          };
         }
         this.setState({
           decks,
@@ -43,7 +66,7 @@ export default class App extends React.Component {
         <View style={{backgroundColor: purple, height: Constants.statusBarHeight}}>
           <StatusBar translucent backgroundColor={purple} barStyle='light-content' />
         </View>
-        <DashBoard />
+        <Dashboard decks={this.state.decks}/>
       </View>
     );
   }
