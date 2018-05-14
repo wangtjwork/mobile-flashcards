@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, YellowBox, Platform } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Platform } from 'react-native';
 import AddDeck from './components/AddDeck';
 import AddQuestion from './components/AddQuestion';
 import Dashboard from './components/Dashboard';
@@ -8,8 +8,6 @@ import { Constants } from 'expo';
 import { purple, white } from './utils/colors';
 import { createBottomTabNavigator } from 'react-navigation';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
-
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 const Tabs = createBottomTabNavigator({
   Dashboard: {

@@ -13,7 +13,7 @@ class Deck extends Component {
   }
 
   render() {
-    const { deck } = this.props;
+    const { deck } = this.props.navigation.state.params;
 
     return (
       <View style={{flex: 1}}>

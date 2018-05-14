@@ -47,8 +47,13 @@ class Dashboard extends Component {
       })
   }
 
-  handleGoToDeck = () => {
-    console.log('Pressed');
+  handleGoToDeck = (deck) => {
+    const { navigation } = this.props;
+    
+    navigation.navigate(
+      'Deck',
+      { deck }
+    )
   }
 
   render() {
@@ -67,8 +72,9 @@ class Dashboard extends Component {
         {Object.keys(decks).map((deckTitle) => {
           const deck = decks[deckTitle];
           const size = deck.questions.length;
+
           return (
-            <TouchableOpacity key={deck.title} style={styles.deckContainer} onPress={this.handleGoToDeck}>
+            <TouchableOpacity key={deck.title} style={styles.deckContainer} onPress={() => this.handleGoToDeck(deck)}>
               <Text style={styles.deckTitle}>{deck.title}</Text>
               <Text style={styles.deckSize}>{size} {size === 1 ? 'card' : 'cards'}</Text>
             </TouchableOpacity>
