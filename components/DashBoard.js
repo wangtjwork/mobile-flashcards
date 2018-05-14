@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation';
 import { getDecks } from '../utils/helpers';
 import { gray, red, white, purple } from '../utils/colors';
 import Deck from './Deck';
+import AddQuestion from './AddQuestion';
 
 class Dashboard extends Component {
   state = {
@@ -47,12 +48,12 @@ class Dashboard extends Component {
       })
   }
 
-  handleGoToDeck = (deck) => {
+  handleGoToDeck = (deckTitle) => {
     const { navigation } = this.props;
-    
+
     navigation.navigate(
       'Deck',
-      { deck }
+      { title: deckTitle }
     )
   }
 
@@ -74,7 +75,7 @@ class Dashboard extends Component {
           const size = deck.questions.length;
 
           return (
-            <TouchableOpacity key={deck.title} style={styles.deckContainer} onPress={() => this.handleGoToDeck(deck)}>
+            <TouchableOpacity key={deck.title} style={styles.deckContainer} onPress={() => this.handleGoToDeck(deck.title)}>
               <Text style={styles.deckTitle}>{deck.title}</Text>
               <Text style={styles.deckSize}>{size} {size === 1 ? 'card' : 'cards'}</Text>
             </TouchableOpacity>
@@ -108,6 +109,15 @@ const DecksNavigator = createStackNavigator({
   },
   Deck: {
     screen: Deck,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  },
+  AddQuestion: {
+    screen: AddQuestion,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
