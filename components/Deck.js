@@ -58,7 +58,7 @@ class Deck extends Component {
   handleStartQuiz = (deck) => {
     this.props.navigation.navigate(
       'Quiz',
-      { cardTitle: deck.title, size: deck.questions.length }
+      { cardTitle: deck.title }
     );
   }
 

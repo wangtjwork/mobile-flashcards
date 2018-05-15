@@ -13,10 +13,10 @@ class Quiz extends Component {
   }
 
   static navigationOptions = ({ navigation }) => {
-    const { cardTitle, size } = navigation.state.params;
+    const { cardTitle } = navigation.state.params;
 
     return {
-      title: `Quiz: ${cardTitle} - 0/${size}`
+      title: `Quiz: ${cardTitle}`
     }
   }
 
@@ -48,22 +48,20 @@ class Quiz extends Component {
       })
   }
 
-  changeTitle = () => {
-    const { setParams } = this.props.navigation;
-    const { curIndex, deck } = this.state;
-
-    const newTitle = `Quiz: ${deck.title} - ${curIndex}/${deck.questions.length}`;
-
-    setParams({ title: newTitle });
-  }
+  // changeTitle = () => {
+  //   const { setParams } = this.props.navigation;
+  //   const { curIndex, deck } = this.state;
+  //
+  //   const newTitle = `Quiz: ${deck.title} - ${curIndex}/${deck.questions.length}`;
+  //
+  //   setParams({ title: newTitle });
+  // }
 
   goToNextCard = () => {
     this.setState((oldState) => ({
       curIndex: oldState.curIndex + 1,
       showQuestion: true,
-    }), () => {
-      this.changeTitle();
-    });
+    }));
   }
 
   toggleCard = () => {
@@ -98,6 +96,9 @@ class Quiz extends Component {
 
     return (
       <View style={styles.container}>
+        <View style={{flex: 1}}>
+          <Text>{deck.questions.length - curIndex}/{deck.questions.length}</Text>
+        </View>
         <View style={styles.cardView}>
           <Text style={{fontSize: 30, textAlign: 'center'}}>{ showQuestion ? card.question : card.answer }</Text>
           <TouchableOpacity onPress={this.toggleCard}>
@@ -118,12 +119,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   cardView: {
-    flex: 2,
+    flex: 6,
     justifyContent: 'center',
     alignItems: 'center'
   },
   buttons: {
-    flex: 1,
+    flex: 3,
   }
 })
 
