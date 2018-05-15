@@ -13,21 +13,20 @@ class Quiz extends Component {
   }
 
   static navigationOptions = ({ navigation }) => {
-    const { title, size } = navigation.state.params;
+    const { cardTitle, size } = navigation.state.params;
 
     return {
-      title: `Quiz: ${title} - 0/${size}`
+      title: `Quiz: ${cardTitle} - 0/${size}`
     }
   }
 
   componentDidMount() {
-    const { title } = this.props.navigation.state.params;
+    const { cardTitle } = this.props.navigation.state.params;
 
-    getDeck(title)
+    getDeck(cardTitle)
       .then((deck) => {
         this.setState({
-          deck,
-          loading: false
+          deck
         });
       })
       .catch(() => {
@@ -53,14 +52,18 @@ class Quiz extends Component {
     const { setParams } = this.props.navigation;
     const { curIndex, deck } = this.state;
 
-    setParams({ title: `Quiz: ${deck.title} - ${curIndex}/${deck.questions.length}` });
+    const newTitle = `Quiz: ${deck.title} - ${curIndex}/${deck.questions.length}`;
+
+    setParams({ title: newTitle });
   }
 
   goToNextCard = () => {
     this.setState((oldState) => ({
       curIndex: oldState.curIndex + 1,
       showQuestion: true,
-    }));
+    }), () => {
+      this.changeTitle();
+    });
   }
 
   toggleCard = () => {
@@ -70,17 +73,14 @@ class Quiz extends Component {
   }
 
   handleCorrect = () => {
-    this.goToNextCard();
     this.setState((oldState) => ({
-      correctQuestions: correctQuestions + 1
+      correctQuestions: oldState.correctQuestions + 1
     }));
-
-    this.changeTitle();
+    this.goToNextCard();
   }
 
   handleIncorrect = () => {
     this.goToNextCard();
-    this.changeTitle();
   }
 
   render() {
