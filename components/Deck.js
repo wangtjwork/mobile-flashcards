@@ -32,16 +32,7 @@ class Deck extends Component {
         this.setState({
           deck: {
             title: 'React',
-            questions: [
-              {
-                question: 'What is React?',
-                answer: 'A library for managing user interfaces'
-              },
-              {
-                question: 'Where do you make Ajax requests in React?',
-                answer: 'The componentDidMount lifecycle event'
-              }
-            ]
+            questions: []
           },
           loading: false
         })
@@ -85,7 +76,9 @@ class Deck extends Component {
             Add Card
           </TextButton>
           <TextButton style={{backgroundColor: black, width: 175, borderColor: black}}
-            onPress={() => this.handleStartQuiz(deck)}>
+            onPress={() => this.handleStartQuiz(deck)}
+            disabled={deck.questions.length === 0}
+          >
             Start Quiz
           </TextButton>
         </View>
