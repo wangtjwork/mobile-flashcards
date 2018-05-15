@@ -55,8 +55,11 @@ class Deck extends Component {
     );
   }
 
-  handleStartQuiz = () => {
-
+  handleStartQuiz = (title) => {
+    this.props.navigation.navigate(
+      'Quiz',
+      { title }
+    );
   }
 
   render() {
@@ -82,7 +85,7 @@ class Deck extends Component {
             Add Card
           </TextButton>
           <TextButton style={{backgroundColor: black, width: 175, borderColor: black}}
-            onPress={this.handleStartQuiz}>
+            onPress={() => this.handleStartQuiz(deck.title)}>
             Start Quiz
           </TextButton>
         </View>

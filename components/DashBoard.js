@@ -5,6 +5,7 @@ import { getDecks } from '../utils/helpers';
 import { gray, red, white, purple } from '../utils/colors';
 import Deck from './Deck';
 import AddQuestion from './AddQuestion';
+import Quiz from './Quiz';
 
 class Dashboard extends Component {
   state = {
@@ -133,6 +134,15 @@ const DecksNavigator = createStackNavigator({
   },
   AddQuestion: {
     screen: AddQuestion,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  },
+  Quiz: {
+    screen: Quiz,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
