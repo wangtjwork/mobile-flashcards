@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import TextButton from './TextButton';
+import { red, green, white } from '../utils/colors';
+import { getDeck } from '../utils/helpers';
 
 class Quiz extends Component {
   state = {
     curIndex: 0,
-    deck: {}
+    deck: {},
+    showQuestion: true
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -15,6 +19,35 @@ class Quiz extends Component {
     }
   }
 
+  componentDidMount() {
+    const { title } = this.props.navigation.state.params;
+
+    getDeck(title)
+      .then((deck) => {
+        this.setState({
+          deck,
+          loading: false
+        });
+      })
+      .catch(() => {
+        this.setState({
+          deck: {
+            title: 'React',
+            questions: [
+              {
+                question: 'What is React?',
+                answer: 'A library for managing user interfaces'
+              },
+              {
+                question: 'Where do you make Ajax requests in React?',
+                answer: 'The componentDidMount lifecycle event'
+              }
+            ]
+          }
+        })
+      })
+  }
+
   changeTitle = () => {
     const { setParams } = this.props.navigation;
     const { curIndex, deck } = this.state;
@@ -23,12 +56,47 @@ class Quiz extends Component {
   }
 
   render() {
+    const { deck, curIndex, showQuestion } = this.state;
+
+    if (Object.keys(deck).length === 0) {
+      return (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{fontSize: 30}}>Loading...</Text>
+        </View>
+      )
+    }
+
+    const card = deck.questions[curIndex];
+
     return (
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        <Text>Quiz</Text>
+      <View style={styles.container}>
+        <View style={styles.cardView}>
+          <Text style={{fontSize: 30}}>{ showQuestion ? card.question : card.answer }</Text>
+          <TouchableOpacity onPress={() => {console.log('toggle')}}>
+            <Text style={{color: red}}>{ showQuestion ? 'Answer' : 'Question' }</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.buttons}>
+          <TextButton style={{backgroundColor: green}} onPress={() => {console.log('correct')}}>Correct</TextButton>
+          <TextButton style={{backgroundColor: red}} onPress={() => {console.log('incorrect')}}>Incorrect</TextButton>
+        </View>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  cardView: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttons: {
+    flex: 1,
+  }
+})
 
 export default Quiz;

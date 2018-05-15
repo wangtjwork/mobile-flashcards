@@ -59,7 +59,7 @@ class Dashboard extends Component {
       selected: deckTitle
     }, () => {
       Animated.sequence([
-        Animated.timing(bounceValue, { duration: 300, toValue: 1.10 }),
+        Animated.timing(bounceValue, { duration: 100, toValue: 1.10 }),
         Animated.spring(bounceValue, { toValue: 1, friction: 4 })
       ]).start(() => {
         navigation.navigate(
