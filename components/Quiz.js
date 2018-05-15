@@ -90,7 +90,7 @@ class Quiz extends Component {
   }
 
   toDeckPage = () => {
-
+    this.props.navigation.goBack();
   }
 
   render() {
@@ -116,7 +116,12 @@ class Quiz extends Component {
           >
             Restart Quiz
           </TextButton>
-          <TextButton onPress={this.toDeckPage}>Go Back</TextButton>
+          <TextButton
+            style={{backgroundColor: black, width: 200}}
+            onPress={this.toDeckPage}
+          >
+            Go Back
+          </TextButton>
         </View>
       )
     }
