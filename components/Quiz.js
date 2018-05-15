@@ -8,7 +8,8 @@ class Quiz extends Component {
   state = {
     curIndex: 0,
     deck: {},
-    showQuestion: true
+    showQuestion: true,
+    correctQuestions: 0
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -52,7 +53,34 @@ class Quiz extends Component {
     const { setParams } = this.props.navigation;
     const { curIndex, deck } = this.state;
 
-    setParams({ title: `Quiz: ${deck.title} - ${curIndex}/${deck.questions.length}` })
+    setParams({ title: `Quiz: ${deck.title} - ${curIndex}/${deck.questions.length}` });
+  }
+
+  goToNextCard = () => {
+    this.setState((oldState) => ({
+      curIndex: oldState.curIndex + 1,
+      showQuestion: true,
+    }));
+  }
+
+  toggleCard = () => {
+    this.setState((oldState) => ({
+      showQuestion: !oldState.showQuestion
+    }));
+  }
+
+  handleCorrect = () => {
+    this.goToNextCard();
+    this.setState((oldState) => ({
+      correctQuestions: correctQuestions + 1
+    }));
+
+    this.changeTitle();
+  }
+
+  handleIncorrect = () => {
+    this.goToNextCard();
+    this.changeTitle();
   }
 
   render() {
@@ -71,14 +99,14 @@ class Quiz extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.cardView}>
-          <Text style={{fontSize: 30}}>{ showQuestion ? card.question : card.answer }</Text>
-          <TouchableOpacity onPress={() => {console.log('toggle')}}>
+          <Text style={{fontSize: 30, textAlign: 'center'}}>{ showQuestion ? card.question : card.answer }</Text>
+          <TouchableOpacity onPress={this.toggleCard}>
             <Text style={{color: red}}>{ showQuestion ? 'Answer' : 'Question' }</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.buttons}>
-          <TextButton style={{backgroundColor: green}} onPress={() => {console.log('correct')}}>Correct</TextButton>
-          <TextButton style={{backgroundColor: red}} onPress={() => {console.log('incorrect')}}>Incorrect</TextButton>
+          <TextButton style={{backgroundColor: green, width: 200}} onPress={this.handleCorrect}>Correct</TextButton>
+          <TextButton style={{backgroundColor: red, width: 200}} onPress={this.handleIncorrect}>Incorrect</TextButton>
         </View>
       </View>
     )
