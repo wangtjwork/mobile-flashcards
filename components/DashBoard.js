@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { getDecks } from '../utils/helpers';
 import { gray, red, white, purple } from '../utils/colors';
@@ -10,6 +10,8 @@ class Dashboard extends Component {
   state = {
     decks: {},
     loading: true,
+    bounceValue: new Animated.Value(1),
+    selected: ''
   }
 
   componentDidMount() {
@@ -49,16 +51,26 @@ class Dashboard extends Component {
   }
 
   handleGoToDeck = (deckTitle) => {
+    const { bounceValue } = this.state;
     const { navigation } = this.props;
 
-    navigation.navigate(
-      'Deck',
-      { title: deckTitle }
-    )
+    this.setState({
+      selected: deckTitle
+    }, () => {
+      Animated.sequence([
+        Animated.timing(bounceValue, { duration: 300, toValue: 1.10 }),
+        Animated.spring(bounceValue, { toValue: 1, friction: 4 })
+      ]).start(() => {
+        navigation.navigate(
+          'Deck',
+          { title: deckTitle }
+        )
+      })
+    });
   }
 
   render() {
-    const { decks, loading } = this.state;
+    const { decks, loading, bounceValue, selected } = this.state;
 
     if (loading) {
       return (
@@ -76,7 +88,10 @@ class Dashboard extends Component {
 
           return (
             <TouchableOpacity key={deck.title} style={styles.deckContainer} onPress={() => this.handleGoToDeck(deck.title)}>
-              <Text style={styles.deckTitle}>{deck.title}</Text>
+              <Animated.Text
+                style={[styles.deckTitle, selected === deck.title && { transform:[{scale: bounceValue}]}]}>
+                {deck.title}
+              </Animated.Text>
               <Text style={styles.deckSize}>{size} {size === 1 ? 'card' : 'cards'}</Text>
             </TouchableOpacity>
           )
