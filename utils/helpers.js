@@ -5,7 +5,14 @@ const FLASHCARD_KEY = 'Personal:Flashcard';
 
 export function getDecks() {
   return AsyncStorage.getItem(FLASHCARD_KEY)
-    .then(JSON.parse);
+    .then(JSON.parse)
+    .then((data) => {
+      if (data === null) {
+        return {};
+      } else {
+        return data;
+      }
+    })
 }
 
 export function getDeck(id) {

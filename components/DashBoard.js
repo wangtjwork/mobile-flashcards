@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { getDecks } from '../utils/helpers';
-import { gray, red, white, purple } from '../utils/colors';
-import Deck from './Deck';
-import AddQuestion from './AddQuestion';
-import Quiz from './Quiz';
+import { gray, red, white, purple, black } from '../utils/colors';
+import TextButton from './TextButton';
 
 class Dashboard extends Component {
   state = {
@@ -18,32 +16,6 @@ class Dashboard extends Component {
   componentDidMount() {
     getDecks()
       .then((decks) => {
-        if (decks === null) {
-          decks = {
-            React: {
-              title: 'React',
-              questions: [
-                {
-                  question: 'What is React?',
-                  answer: 'A library for managing user interfaces'
-                },
-                {
-                  question: 'Where do you make Ajax requests in React?',
-                  answer: 'The componentDidMount lifecycle event'
-                }
-              ]
-            },
-            JavaScript: {
-              title: 'JavaScript',
-              questions: [
-                {
-                  question: 'What is a closure?',
-                  answer: 'The combination of a function and the lexical environment within which that function was declared.'
-                }
-              ]
-            }
-          };
-        }
         this.setState({
           decks,
           loading: false
@@ -81,6 +53,18 @@ class Dashboard extends Component {
       )
     }
 
+    if (Object.keys(decks).length === 0) {
+      return (
+        <View style={styles.container}>
+          <Text style={{color: red, fontSize: 35}}>No decks yet</Text>
+          <TextButton style={{backgroundColor: black, width: 150}}
+            onPress={() => {this.props.navigation.navigate('AddDeck')}}>
+            Add Deck
+          </TextButton>
+        </View>
+      )
+    }
+
     return (
       <View style={{flex: 1}}>
         {Object.keys(decks).map((deckTitle) => {
@@ -103,6 +87,11 @@ class Dashboard extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   deckContainer: {
     height: 150,
     borderBottomColor: gray,

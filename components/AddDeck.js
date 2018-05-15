@@ -16,7 +16,6 @@ class AddDeck extends Component {
   }
 
   handleSubmit = () => {
-    // TODO: go to decks
     // TODO: Add a new deck
 
     this.props.navigation.navigate('Dashboard');
