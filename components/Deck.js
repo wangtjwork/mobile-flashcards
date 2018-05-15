@@ -32,7 +32,16 @@ class Deck extends Component {
         this.setState({
           deck: {
             title: 'React',
-            questions: []
+            questions: [
+              {
+                question: 'What is React?',
+                answer: 'A library for managing user interfaces'
+              },
+              {
+                question: 'Where do you make Ajax requests in React?',
+                answer: 'The componentDidMount lifecycle event'
+              }
+            ]
           },
           loading: false
         })
