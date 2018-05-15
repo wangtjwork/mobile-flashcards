@@ -2,7 +2,15 @@ import React from 'react';
 import { TouchableOpacity, Text, Platform, StyleSheet } from 'react-native';
 import { lightPurp, white } from '../utils/colors';
 
-export default function TextButton({ children, onPress, style={}, textStyle={} }) {
+export default function TextButton({ children, disabled = false, onPress, style={}, textStyle={} }) {
+
+  if (disabled === true) {
+    return (
+      <View style={[styles.submitBtn, style]}>
+        <Text style={[styles.text, textStyle]}>{children}</Text>
+      </View>
+    )
+  }
 
   return (
     <TouchableOpacity style={[styles.submitBtn, style]} onPress={onPress}>
