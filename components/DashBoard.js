@@ -119,37 +119,5 @@ const styles = StyleSheet.create({
   }
 });
 
-const DecksNavigator = createStackNavigator({
-  Dashboard: {
-    screen: Dashboard,
-  },
-  Deck: {
-    screen: Deck,
-    navigationOptions: {
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple
-      }
-    }
-  },
-  AddQuestion: {
-    screen: AddQuestion,
-    navigationOptions: {
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple
-      }
-    }
-  },
-  Quiz: {
-    screen: Quiz,
-    navigationOptions: {
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple
-      }
-    }
-  }
-})
 
-export default DecksNavigator
+export default Dashboard

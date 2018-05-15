@@ -4,9 +4,10 @@ import AddDeck from './components/AddDeck';
 import AddQuestion from './components/AddQuestion';
 import Dashboard from './components/Dashboard';
 import Deck from './components/Deck';
+import Quiz from './components/Quiz';
 import { Constants } from 'expo';
 import { purple, white } from './utils/colors';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 const Tabs = createBottomTabNavigator({
@@ -39,6 +40,47 @@ const Tabs = createBottomTabNavigator({
       shadowOpacity: 1
     }
   }
+});
+
+
+const DecksNavigator = createStackNavigator({
+  HomePage: {
+    screen: Tabs,
+    navigationOptions: {
+      title: 'Home',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  },
+  Deck: {
+    screen: Deck,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  },
+  AddQuestion: {
+    screen: AddQuestion,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  }
 })
 
 export default class App extends React.Component {
@@ -48,7 +90,7 @@ export default class App extends React.Component {
         <View style={{backgroundColor: purple, height: Constants.statusBarHeight}}>
           <StatusBar translucent backgroundColor={purple} barStyle='light-content' />
         </View>
-        <Tabs />
+        <DecksNavigator />
       </View>
     );
   }
