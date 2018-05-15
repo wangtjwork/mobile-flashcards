@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import TextButton from './TextButton';
-import { red, green, white } from '../utils/colors';
+import { red, green, white, black } from '../utils/colors';
 import { getDeck } from '../utils/helpers';
 
 class Quiz extends Component {
@@ -81,13 +81,42 @@ class Quiz extends Component {
     this.goToNextCard();
   }
 
+  restartQuiz = () => {
+    this.setState({
+      curIndex: 0,
+      showQuestion: true,
+      correctQuestions: 0
+    });
+  }
+
+  toDeckPage = () => {
+
+  }
+
   render() {
-    const { deck, curIndex, showQuestion } = this.state;
+    const { deck, curIndex, showQuestion, correctQuestions } = this.state;
 
     if (Object.keys(deck).length === 0) {
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <Text style={{fontSize: 30}}>Loading...</Text>
+        </View>
+      )
+    }
+
+    if (curIndex === deck.questions.length) { // reach end of quiz. Show scores
+      return (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{fontSize: 40}}>Congratulations!</Text>
+          <Text style={{fontSize: 25}}>Your correct percentage: {Math.floor((correctQuestions / deck.questions.length) * 100)}%</Text>
+          <TextButton
+            style={{backgroundColor: white, width: 200}}
+            textStyle={{color: black}}
+            onPress={this.restartQuiz}
+          >
+            Restart Quiz
+          </TextButton>
+          <TextButton onPress={this.toDeckPage}>Go Back</TextButton>
         </View>
       )
     }
