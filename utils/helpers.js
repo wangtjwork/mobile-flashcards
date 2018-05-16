@@ -34,7 +34,11 @@ export function saveDeckTitle(title) {
     });
 }
 
-export function addCardToDeck(title, questionAndAnswer) {
+export function addCardToDeck(title, question, answer) {
+  const questionAndAnswer = {
+    question,
+    answer
+  }
   return getDecks()
     .then(decks => ({
       ...decks,

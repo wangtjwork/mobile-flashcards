@@ -12,14 +12,6 @@ class Quiz extends Component {
     correctQuestions: 0
   }
 
-  static navigationOptions = ({ navigation }) => {
-    const { cardTitle } = navigation.state.params;
-
-    return {
-      title: `Quiz: ${cardTitle}`
-    }
-  }
-
   componentDidMount() {
     const { cardTitle } = this.props.navigation.state.params;
 
@@ -28,24 +20,7 @@ class Quiz extends Component {
         this.setState({
           deck
         });
-      })
-      .catch(() => {
-        this.setState({
-          deck: {
-            title: 'React',
-            questions: [
-              {
-                question: 'What is React?',
-                answer: 'A library for managing user interfaces'
-              },
-              {
-                question: 'Where do you make Ajax requests in React?',
-                answer: 'The componentDidMount lifecycle event'
-              }
-            ]
-          }
-        })
-      })
+      });
   }
 
   // changeTitle = () => {

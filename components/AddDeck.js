@@ -17,10 +17,10 @@ class AddDeck extends Component {
   }
 
   handleSubmit = () => {
-    // TODO: Add a new deck
-    saveDeckTitle(this.state.title)
+    const { title } = this.state;
+    saveDeckTitle(title)
       .then(() => {
-        DeviceEventEmitter.emit('addedDeck');
+        DeviceEventEmitter.emit('addedDeck', { title });
       })
       .then(() => {
         this.props.navigation.navigate('Dashboard');
@@ -45,7 +45,7 @@ class AddDeck extends Component {
           Submit
         </TextButton>
         <TextButton
-          onPress={() => {DeviceEventEmitter.emit('addedDeck');clearStorage();}}
+          onPress={() => {clearStorage()}}
           style={{width: 150, backgroundColor: black}}
         >
           Clear

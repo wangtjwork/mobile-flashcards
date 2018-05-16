@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform, DeviceEventEmitter } from 'react-native';
 import { black } from '../utils/colors';
 import CustomInput from './CustomInput';
 import TextButton from './TextButton';
+import { addCardToDeck } from '../utils/helpers';
 
 class AddQuestion extends Component {
   state = {
@@ -27,13 +28,13 @@ class AddQuestion extends Component {
   handleSubmit = () => {
     const { question, answer } = this.state;
     const { title } = this.props.navigation.state.params;
-    console.log('Question:', question);
-    console.log('Answer:', answer);
-    console.log('Deck:', title);
-
-    // TODO: submit to database,
-    // TODO: go back to deck
-    this.props.navigation.goBack();
+    addCardToDeck(title, question, answer)
+      .then(() => {
+        DeviceEventEmitter.emit('addedCard');
+      })
+      .then(() => {
+        this.props.navigation.goBack();
+      })
   }
 
   render() {

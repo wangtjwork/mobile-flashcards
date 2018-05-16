@@ -14,7 +14,15 @@ class Dashboard extends Component {
   }
 
   componentWillMount() {
-    DeviceEventEmitter.addListener('addedDeck', () => this.updateDecksAsync());
+    DeviceEventEmitter.addListener('addedDeck', ({ title }) => {
+      this.updateDecksAsync()
+        .then(() => {
+          this.props.navigation.navigate(
+            'Deck',
+            { title }
+          );
+        });
+    });
     DeviceEventEmitter.addListener('addedCard', () => this.updateDecksAsync());
   }
 
@@ -23,7 +31,7 @@ class Dashboard extends Component {
   }
 
   updateDecksAsync = () => {
-    getDecks()
+    return getDecks()
       .then((decks) => {
         this.setState({
           decks,
