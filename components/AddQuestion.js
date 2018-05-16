@@ -27,8 +27,12 @@ class AddQuestion extends Component {
 
   handleSubmit = () => {
     const { question, answer } = this.state;
+    const card = {
+      question,
+      answer
+    }
     const { title } = this.props.navigation.state.params;
-    addCardToDeck(title, question, answer)
+    addCardToDeck(title, card)
       .then(() => {
         DeviceEventEmitter.emit('addedCard');
       })

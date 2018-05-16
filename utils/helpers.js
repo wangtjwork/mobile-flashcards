@@ -34,17 +34,13 @@ export function saveDeckTitle(title) {
     });
 }
 
-export function addCardToDeck(title, question, answer) {
-  const questionAndAnswer = {
-    question,
-    answer
-  }
+export function addCardToDeck(title, card) {
   return getDecks()
     .then(decks => ({
       ...decks,
       [title]: {
         ...decks[title],
-        questions: decks[title].questions.concat([questionAndAnswer])
+        questions: decks[title].questions.concat([card])
       }
     }))
     .then((decks) => {
