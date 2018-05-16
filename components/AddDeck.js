@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, DeviceEventEmitter } from 'react-native';
+import { KeyboardAvoidingView, View, Text, StyleSheet, DeviceEventEmitter } from 'react-native';
 import CustomInput from './CustomInput';
 import TextButton from './TextButton';
 import { black } from '../utils/colors';
@@ -31,8 +31,10 @@ class AddDeck extends Component {
     const { title, handleChange } = this.state;
 
     return (
-      <View style={styles.container}>
-        <Text style={styles.header}>What is the title of your new deck?</Text>
+      <KeyboardAvoidingView behavior='position' style={styles.container} enabled>
+        <View>
+          <Text style={styles.header}>What is the title of your new deck?</Text>
+        </View>
         <CustomInput
           placeholder={'Deck Title'}
           value={title}
@@ -50,7 +52,7 @@ class AddDeck extends Component {
         >
           Clear
         </TextButton>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
@@ -58,12 +60,11 @@ class AddDeck extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 50
   },
   header: {
     fontSize: 50,
     textAlign: 'center',
-    padding: 15
+    padding: 15,
   }
 })
 
