@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, DeviceEventEmitter } from 'react-native';
 import CustomInput from './CustomInput';
 import TextButton from './TextButton';
 import { black } from '../utils/colors';
+import { saveDeckTitle, clearStorage } from '../utils/helpers';
 
 class AddDeck extends Component {
   state = {
@@ -17,8 +18,13 @@ class AddDeck extends Component {
 
   handleSubmit = () => {
     // TODO: Add a new deck
-
-    this.props.navigation.navigate('Dashboard');
+    saveDeckTitle(this.state.title)
+      .then(() => {
+        DeviceEventEmitter.emit('addedDeck');
+      })
+      .then(() => {
+        this.props.navigation.navigate('Dashboard');
+      })
   }
 
   render() {
@@ -37,6 +43,12 @@ class AddDeck extends Component {
           style={{width: 150, backgroundColor: black}}
         >
           Submit
+        </TextButton>
+        <TextButton
+          onPress={() => clearStorage()}
+          style={{width: 150, backgroundColor: black}}
+        >
+          Clear
         </TextButton>
       </View>
     )

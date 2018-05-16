@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Animated, DeviceEventEmitter } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { getDecks } from '../utils/helpers';
 import { gray, red, white, purple, black } from '../utils/colors';
@@ -13,7 +13,15 @@ class Dashboard extends Component {
     selected: ''
   }
 
+  componentWillMount() {
+    DeviceEventEmitter.addListener('addedDeck', () => this.updateDecksAsync());
+  }
+
   componentDidMount() {
+    this.updateDecksAsync();
+  }
+
+  updateDecksAsync = () => {
     getDecks()
       .then((decks) => {
         this.setState({

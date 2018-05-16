@@ -30,7 +30,7 @@ export function saveDeckTitle(title) {
       }
     }))
     .then((decks) => {
-      return AsyncStorage.setItem(FLASHCARD_KEY, JSON.stringify(decks));
+      AsyncStorage.setItem(FLASHCARD_KEY, JSON.stringify(decks));
     });
 }
 
@@ -46,4 +46,8 @@ export function addCardToDeck(title, questionAndAnswer) {
     .then((decks) => {
       return AsyncStorage.setItem(FLASHCARD_KEY, JSON.stringify(decks));
     })
+}
+
+export function clearStorage () {
+  AsyncStorage.removeItem(FLASHCARD_KEY);
 }
