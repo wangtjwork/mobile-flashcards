@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, DeviceEventEmitter } from 'react-native';
 import TextButton from './TextButton';
 import { white, black, gray } from '../utils/colors';
 import { getDeck } from '../utils/helpers'
@@ -18,7 +18,15 @@ class Deck extends Component {
     }
   }
 
+  componentWillMount() {
+    DeviceEventEmitter.addListener('addedCard', () => this.updateDeckAsync());
+  }
+
   componentDidMount() {
+    this.updateDeckAsync();
+  }
+
+  updateDeckAsync = () => {
     const { title } = this.props.navigation.state.params;
 
     getDeck(title)
@@ -27,24 +35,6 @@ class Deck extends Component {
           deck,
           loading: false
         });
-      })
-      .catch(() => {
-        this.setState({
-          deck: {
-            title: 'React',
-            questions: [
-              {
-                question: 'What is React?',
-                answer: 'A library for managing user interfaces'
-              },
-              {
-                question: 'Where do you make Ajax requests in React?',
-                answer: 'The componentDidMount lifecycle event'
-              }
-            ]
-          },
-          loading: false
-        })
       })
   }
 

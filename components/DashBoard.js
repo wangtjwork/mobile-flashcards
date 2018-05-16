@@ -15,6 +15,7 @@ class Dashboard extends Component {
 
   componentWillMount() {
     DeviceEventEmitter.addListener('addedDeck', () => this.updateDecksAsync());
+    DeviceEventEmitter.addListener('addedCard', () => this.updateDecksAsync());
   }
 
   componentDidMount() {

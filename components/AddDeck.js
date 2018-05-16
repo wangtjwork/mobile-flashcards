@@ -45,7 +45,7 @@ class AddDeck extends Component {
           Submit
         </TextButton>
         <TextButton
-          onPress={() => clearStorage()}
+          onPress={() => {DeviceEventEmitter.emit('addedDeck');clearStorage();}}
           style={{width: 150, backgroundColor: black}}
         >
           Clear
