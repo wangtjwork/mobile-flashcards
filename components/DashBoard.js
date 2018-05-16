@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Animated, DeviceEventEmitter } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Animated, DeviceEventEmitter, ScrollView } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { getDecks } from '../utils/helpers';
 import { gray, red, white, purple, black } from '../utils/colors';
@@ -83,7 +83,7 @@ class Dashboard extends Component {
     }
 
     return (
-      <View style={{flex: 1}}>
+      <ScrollView style={{flex: 1}}>
         {Object.keys(decks).map((deckTitle) => {
           const deck = decks[deckTitle];
           const size = deck.questions.length;
@@ -98,7 +98,7 @@ class Dashboard extends Component {
             </TouchableOpacity>
           )
         })}
-      </View>
+      </ScrollView>
     )
   }
 }
