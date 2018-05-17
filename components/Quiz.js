@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import TextButton from './TextButton';
 import { red, green, white, black } from '../utils/colors';
-import { getDeck } from '../utils/helpers';
+import { getDeck, clearLocalNotifications, setLocalNotification } from '../utils/helpers';
 
 class Quiz extends Component {
   state = {
@@ -36,7 +36,15 @@ class Quiz extends Component {
     this.setState((oldState) => ({
       curIndex: oldState.curIndex + 1,
       showQuestion: true,
-    }));
+    }), this.checkEndOfQuiz);
+  }
+
+  checkEndOfQuiz = () => {
+    const { deck, curIndex} = this.state;
+
+    if (deck.questions.length === curIndex) {
+      clearLocalNotifications().then(setLocalNotification);
+    }
   }
 
   toggleCard = () => {

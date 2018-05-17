@@ -9,6 +9,7 @@ import { Constants } from 'expo';
 import { purple, white } from './utils/colors';
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { setLocalNotification } from './utils/helpers';
 
 const Tabs = createBottomTabNavigator({
   Dashboard: {
@@ -84,6 +85,10 @@ const DecksNavigator = createStackNavigator({
 })
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
